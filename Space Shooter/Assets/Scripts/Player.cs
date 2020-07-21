@@ -10,14 +10,19 @@ public class Player : MonoBehaviour
     private float _movementX;
     private float _movementY;
 
-    public float xMin, xMax, yMin, yMax;
+    public float yMin, yMax;
 
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
     }
 
-    void Update()
+    void Update() 
+    {
+        Move();
+    }
+
+    void Move()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -27,11 +32,19 @@ public class Player : MonoBehaviour
 
         Vector3 direction = new Vector3(_movementX, _movementY, 0);
 
-        float positionX = Mathf.Clamp(transform.position.x, xMin, xMax);
+        transform.Translate(direction * Time.deltaTime);
+
         float positionY = Mathf.Clamp(transform.position.y, yMin, yMax);
 
-        transform.position = new Vector3(positionX, positionY, transform.position.z);
+        transform.position = new Vector3(transform.position.x, positionY, 0);
 
-        transform.Translate(direction * Time.deltaTime);
+        if (transform.position.x > 9.5f)
+        {
+            transform.position = new Vector3(-9.5f, positionY, 0);
+        }
+        else if (transform.position.x < -9.5f)
+        {
+            transform.position = new Vector3(9.5f, positionY, 0);
+        }
     }
 }
