@@ -305,6 +305,7 @@ MonoBehaviour:
   _fireDelay: 0.5
   laserPrefab: {fileID: 6546283333388107910, guid: 0666af66af6ebee4aa510d94466c58af,
     type: 3}
+  _lives: 3
   yMin: -3.8
   yMax: 0
 --- !u!1 &1585183175
@@ -492,12 +493,12 @@ PrefabInstance:
     - target: {fileID: 951776538691620603, guid: 965387cbde0866541a7cdcfbd12b3956,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 951776538691620603, guid: 965387cbde0866541a7cdcfbd12b3956,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 951776538691620603, guid: 965387cbde0866541a7cdcfbd12b3956,
         type: 3}

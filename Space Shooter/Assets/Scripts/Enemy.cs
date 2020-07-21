@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Damage for player");
+            other.gameObject.GetComponent<Player>().Damage();
             Destroy(gameObject);
         }
         else if (other.tag == "Laser")
