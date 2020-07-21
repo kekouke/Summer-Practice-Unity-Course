@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
+  _fireDelay: 0.5
   laserPrefab: {fileID: 6546283333388107910, guid: 0666af66af6ebee4aa510d94466c58af,
     type: 3}
   yMin: -3.8
