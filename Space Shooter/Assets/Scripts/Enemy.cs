@@ -21,4 +21,18 @@ public class Enemy : MonoBehaviour
             transform.position = new Vector3(Random.Range(-8, 8), 7, 0);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Debug.Log("Damage for player");
+            Destroy(gameObject);
+        }
+        else if (other.tag == "Laser")
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }
