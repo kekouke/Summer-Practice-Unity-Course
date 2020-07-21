@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private float _speed;
+    [SerializeField]
+    private GameObject laserPrefab;
 
     private float _movementX;
     private float _movementY;
@@ -20,6 +22,12 @@ public class Player : MonoBehaviour
     void Update() 
     {
         Move();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        }
+
     }
 
     void Move()
