@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class BoundaryScript : MonoBehaviour
 {
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag != "Enemy")
+        if (other.tag == "Laser")
+        {
+            if (other.transform.parent != null)
+            {
+                Destroy(other.transform.parent.gameObject);
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
+        }
+        else if (other.gameObject.tag != "Enemy")
         {
             Destroy(other.gameObject);
         }

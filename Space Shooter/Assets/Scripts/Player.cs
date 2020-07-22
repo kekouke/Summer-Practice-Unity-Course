@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _fireDelay;
     [SerializeField]
-    private GameObject laserPrefab;
+    private GameObject _laserPrefab;
+    [SerializeField]
+    private GameObject _tripleShotPrefab;
     [SerializeField]
     private int _lives;
 
@@ -20,8 +22,13 @@ public class Player : MonoBehaviour
 
     private float _fireNext;
 
+    private bool _isTripleShotEnabled;
+    private bool _isShieldEnabled;
 
     public float yMin, yMax;
+
+    [SerializeField]
+    private GameObject _shieldVisualizer;
 
     void Start()
     {
@@ -32,7 +39,6 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("_spawnManager is NULL");
         }
-
     }
 
     void Update() 
@@ -74,12 +80,27 @@ public class Player : MonoBehaviour
 
     void Fire()
     {
-        Instantiate(laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+        if (_isTripleShotEnabled)
+        {
+            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+        }
         _fireNext = Time.time + _fireDelay;
     }
 
     public void Damage()
     {
+
+        if (_isShieldEnabled)
+        {
+            _isShieldEnabled = false;
+            _shieldVisualizer.SetActive(false);
+            return;
+        }
+
         _lives--;
 
         if (_lives <= 0)
@@ -87,5 +108,36 @@ public class Player : MonoBehaviour
             _spawnManager.OnPlayerDeath();
             Destroy(gameObject);
         }
+    }
+
+    public void TripleShotActive()
+    {
+        _isTripleShotEnabled = true;
+        StartCoroutine(TripleShotPowerDownRoutine());
+    }
+
+    public void SpeedBoostActive()
+    {
+        _speed *= 2;
+        StartCoroutine(SpeedBoostDownRoutine());
+
+    }
+
+    public void ShieldActive()
+    {
+        _isShieldEnabled = true;
+        _shieldVisualizer.SetActive(true);
+    }
+
+    IEnumerator TripleShotPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5);
+        _isTripleShotEnabled = false;
+    }
+
+    IEnumerator SpeedBoostDownRoutine()
+    {
+        yield return new WaitForSeconds(5);
+        _speed /= 2;
     }
 }
