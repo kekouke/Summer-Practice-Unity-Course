@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject _shieldVisualizer;
+    [SerializeField]
+    private GameObject _sceneController;
 
     void Start()
     {
@@ -112,6 +114,7 @@ public class Player : MonoBehaviour
         if (_lives <= 0)
         {
             _spawnManager.OnPlayerDeath();
+            _sceneController.GetComponent<SceneController>().Restart(true);
             Destroy(gameObject);
         }
     }
