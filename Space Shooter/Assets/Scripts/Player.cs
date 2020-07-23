@@ -22,6 +22,9 @@ public class Player : MonoBehaviour
 
     private float _fireNext;
 
+    [SerializeField]
+    private int _score;
+
     private bool _isTripleShotEnabled;
     private bool _isShieldEnabled;
 
@@ -108,6 +111,12 @@ public class Player : MonoBehaviour
             _spawnManager.OnPlayerDeath();
             Destroy(gameObject);
         }
+    }
+
+    public void AddScore(int score)
+    {
+        _score += score;
+        GameObject.Find("Canvas").GetComponent<UIManager>().UpdateScore(_score);
     }
 
     public void TripleShotActive()
