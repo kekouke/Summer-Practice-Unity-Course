@@ -8,12 +8,16 @@ public class Asteroid : MonoBehaviour
     private float _speed;
     [SerializeField]
     private GameObject _explosion;
+    [SerializeField]
+    private AudioClip _explosionSound;
 
     private SpawnManager _spawnManager;
+    private AudioSource _audioSource;
 
     void Start()
     {
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,10 +30,12 @@ public class Asteroid : MonoBehaviour
     {
         if (other.tag == "Laser")
         {
+            _audioSource.clip = _explosionSound;
+            _audioSource.Play();
             Instantiate(_explosion, transform.position, Quaternion.identity);
-            Destroy(gameObject, 0.25f);
             _spawnManager.StartSpawning();
             Destroy(other.gameObject);
+            Destroy(gameObject, 1.1f);
         }
     }
 }
