@@ -111,11 +111,20 @@ public class Player : MonoBehaviour
         _lives--;
         UImanager.UpdateLives(_lives);
 
-        if (_lives <= 0)
+
+        switch(_lives)
         {
-            _spawnManager.OnPlayerDeath();
-            _sceneController.GetComponent<SceneController>().Restart(true);
-            Destroy(gameObject);
+            case 0:
+                _spawnManager.OnPlayerDeath();
+                _sceneController.GetComponent<SceneController>().Restart(true);
+                Destroy(gameObject);
+                break;
+            case 1:
+                transform.Find("LeftEngine").gameObject.SetActive(true);
+                break;
+            case 2:
+                transform.Find("RightEngine").gameObject.SetActive(true);
+                break;
         }
     }
 
