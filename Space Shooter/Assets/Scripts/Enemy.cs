@@ -8,10 +8,12 @@ public class Enemy : MonoBehaviour
     private float _speed;
 
     private Player _player;
+    private Animator _enemyAnim;
 
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        _enemyAnim = gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -34,15 +36,18 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Player")
         {
             other.gameObject.GetComponent<Player>().Damage();
-            Destroy(gameObject);
+            _enemyAnim.SetTrigger("OnEnemyDestroy");
+            Destroy(GetComponent<Collider2D>());
+            Destroy(gameObject, 2.8f);
         }
         else if (other.tag == "Laser")
         {
             Destroy(other.gameObject);
 
-            _player.AddScore(10); //TODO: Проверка
-
-            Destroy(gameObject);
+            _player.AddScore(10);
+            _enemyAnim.SetTrigger("OnEnemyDestroy");
+            Destroy(GetComponent<Collider2D>());
+            Destroy(gameObject, 2.8f);
         }
     }
 }
