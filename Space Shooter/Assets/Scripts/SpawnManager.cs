@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
 
     private bool _stopSpawning = false;
 
-    void Start()
+    public void StartSpawning()
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
@@ -21,6 +21,8 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemyRoutine()
     {
+        yield return new WaitForSeconds(3);
+
         while (_stopSpawning == false)
         {
             GameObject newEnemy = Instantiate(_enemyPrefab, GetRandomPlace(), Quaternion.identity);
@@ -31,6 +33,8 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPowerupRoutine()
     {
+        yield return new WaitForSeconds(3);
+
         while (_stopSpawning == false)
         {
             int delay = Random.Range(3, 8);

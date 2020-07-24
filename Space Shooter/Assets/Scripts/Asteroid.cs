@@ -8,6 +8,14 @@ public class Asteroid : MonoBehaviour
     private float _speed;
     [SerializeField]
     private GameObject _explosion;
+
+    private SpawnManager _spawnManager;
+
+    void Start()
+    {
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -20,6 +28,7 @@ public class Asteroid : MonoBehaviour
         {
             Instantiate(_explosion, transform.position, Quaternion.identity);
             Destroy(gameObject, 0.25f);
+            _spawnManager.StartSpawning();
             Destroy(other.gameObject);
         }
     }
