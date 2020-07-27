@@ -8,11 +8,12 @@ public class Asteroid : MonoBehaviour
     private float _speed;
     [SerializeField]
     private GameObject _explosion;
+
     [SerializeField]
     private AudioClip _explosionSound;
+    private AudioSource _audioSource;
 
     private SpawnManager _spawnManager;
-    private AudioSource _audioSource;
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class Asteroid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(new Vector3(0, 0, _speed));
+        transform.Rotate(new Vector3(0, 0, _speed) * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -34,6 +35,7 @@ public class Asteroid : MonoBehaviour
             _audioSource.Play();
             Instantiate(_explosion, transform.position, Quaternion.identity);
             _spawnManager.StartSpawning();
+            Destroy(GetComponent<Collider2D>());
             Destroy(other.gameObject);
             Destroy(gameObject, 1.1f);
         }

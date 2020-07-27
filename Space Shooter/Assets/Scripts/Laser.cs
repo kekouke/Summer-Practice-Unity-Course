@@ -6,9 +6,43 @@ public class Laser : MonoBehaviour
 {
     [SerializeField]
     private float _speed;
+
+    private bool _isEnemyLaser;
  
     void Update()
     {
-        transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        if (_isEnemyLaser)
+        {
+            Move(Vector3.down);
+        }
+        else
+        {
+            Move(Vector3.up);
+        }
     }
+
+    void Move(Vector3 direction)
+    {
+        transform.Translate(direction * _speed * Time.deltaTime);
+    }
+
+    public void AssignEnemy()
+    {
+        _isEnemyLaser = true;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player" && _isEnemyLaser)
+        {
+            other.GetComponent<Player>().Damage();
+            Destroy(gameObject);
+        }
+        else if (other.tag == "Enemy" && !_isEnemyLaser)
+        {
+            other.GetComponent<Enemy>().Damage();
+            Destroy(gameObject);
+        }
+    }
+
 }

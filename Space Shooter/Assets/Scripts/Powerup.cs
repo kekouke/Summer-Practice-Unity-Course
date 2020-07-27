@@ -17,7 +17,6 @@ public class Powerup : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        _audioSource.clip = _powerupSound;
     }
 
     void Update()
@@ -29,6 +28,7 @@ public class Powerup : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            _audioSource.clip = _powerupSound;
             _audioSource.Play();
             Player player = other.gameObject.GetComponent<Player>();
             switch(_id)

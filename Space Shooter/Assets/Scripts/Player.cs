@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public bool isPlayerOne;
+    public bool isPlayerTwo;
+
     [SerializeField]
     private float _speed;
     [SerializeField]
@@ -15,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives;
 
+    private SceneController _sceneController;
     private SpawnManager _spawnManager;
     private UIManager UImanager;
 
@@ -34,8 +39,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _shieldVisualizer;
     [SerializeField]
-    private GameObject _sceneController;
-    [SerializeField]
     private AudioClip _fireSound;
     [SerializeField]
     private AudioClip _explosionSound;
@@ -44,8 +47,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        _sceneController = GameObject.Find("SceneController").GetComponent<SceneController>();
         UImanager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSourse = GetComponent<AudioSource>();
 
@@ -53,23 +56,38 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("_spawnManager is NULL");
         }
+
+        if (_sceneController.isSingleMode)
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
+        else
+        {
+
+        }
     }
 
     void Update() 
     {
-        Move();
+        if (isPlayerOne)
+        {
+            Move("Horizontal", "Vertical");
+        }
+        if (isPlayerTwo)
+        {
+            Move("Horizontal2", "Vertical2");
+        }
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _fireNext)
+        if ((Input.GetKeyDown(KeyCode.Space) && isPlayerOne) || (Input.GetKeyDown(KeyCode.RightShift) && isPlayerTwo) && Time.time >= _fireNext)
         {
             Fire();
         }
-
     }
 
-    void Move()
+    void Move(string horizontalAxis, string verticalAxis)
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis(horizontalAxis);
+        float verticalInput = Input.GetAxis(verticalAxis);
 
         _movementX = (horizontalInput * _speed);
         _movementY = (verticalInput * _speed);
@@ -129,7 +147,8 @@ public class Player : MonoBehaviour
         {
             case 0:
                 _spawnManager.OnPlayerDeath();
-                _sceneController.GetComponent<SceneController>().Restart(true);
+                _sceneController.Restart(true);
+
                 Destroy(gameObject);
                 break;
             case 1:
