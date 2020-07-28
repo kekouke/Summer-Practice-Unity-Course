@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private float _jumpHeight;
 
     private float yVelocity;
+    private bool canDoubleJump;
 
     void Start()
     {
@@ -30,10 +31,18 @@ public class Player : MonoBehaviour
 
         if (!_controller.isGrounded)
         {
-            yVelocity -= _gravity;
+            if (Input.GetKeyDown(KeyCode.Space) && canDoubleJump)
+            {
+                canDoubleJump = false;
+                yVelocity = _jumpHeight;
+            } else
+            {
+                yVelocity -= _gravity;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
+            canDoubleJump = true;
             yVelocity = _jumpHeight;
         }
 
