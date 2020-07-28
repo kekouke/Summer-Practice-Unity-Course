@@ -1018,7 +1018,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 482c8e4c0346b704aa5f1760c3c989d5, type: 3}
   - {fileID: 21300000, guid: 9fe6f40efddf0b64fb68a3382b14a4db, type: 3}
   _livesImage: {fileID: 1347652530}
-  _pauseObject: {fileID: 1669158793}
 --- !u!1 &1220181133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,6 +1126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 6379430555573664271, guid: 83d9bf66e61f5b149ba3cd1ef73c0bfd, type: 3}
+  _pauseObject: {fileID: 1669158793}
   isSingleMode: 1
 --- !u!4 &1266338775
 Transform:
@@ -1223,7 +1223,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1280792233}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1669158797}
+        m_MethodName: BackToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1280792233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1511,7 +1522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1669158794
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1664,7 +1675,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1802736101}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1669158797}
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1802736101
 MonoBehaviour:
   m_ObjectHideFlags: 0
