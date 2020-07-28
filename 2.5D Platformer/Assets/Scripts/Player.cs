@@ -11,6 +11,10 @@ public class Player : MonoBehaviour
     private float _speed;
     [SerializeField]
     private float _gravity;
+    [SerializeField]
+    private float _jumpHeight;
+
+    private float yVelocity;
 
     void Start()
     {
@@ -26,9 +30,15 @@ public class Player : MonoBehaviour
 
         if (!_controller.isGrounded)
         {
-            velocity.y = _gravity;
+            yVelocity -= _gravity;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            yVelocity = _jumpHeight;
         }
 
+        velocity.y = yVelocity;
         _controller.Move(velocity * Time.deltaTime);
     }
+       
 }

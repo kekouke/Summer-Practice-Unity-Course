@@ -757,7 +757,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _gravity: -9.8
+  _gravity: 3
+  _jumpHeight: 45
 --- !u!1001 &1883870658
 PrefabInstance:
   m_ObjectHideFlags: 0
