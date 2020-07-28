@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float _speed;
+    [SerializeField]
+    private float _gravity;
 
     void Start()
     {
@@ -19,7 +21,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         float horizontalMove = Input.GetAxis("Horizontal");
-        Vector3 direction = new Vector3(horizontalMove, 0, 0) * _speed;
-        _controller.Move(direction * Time.deltaTime);
+        Vector3 direction = new Vector3(horizontalMove, 0, 0);
+        Vector3 velocity = direction * _speed;
+
+        if (!_controller.isGrounded)
+        {
+            velocity.y = _gravity;
+        }
+
+        _controller.Move(velocity * Time.deltaTime);
     }
 }
