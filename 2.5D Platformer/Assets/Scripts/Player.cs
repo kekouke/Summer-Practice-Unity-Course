@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -15,11 +18,14 @@ public class Player : MonoBehaviour
     private float _jumpHeight;
     [SerializeField]
     private GameObject gui;
+    [SerializeField]
+    Transform _startPosition;
 
     private AudioSource _coinSelected;
     private float yVelocity;
     private bool canDoubleJump;
     private int _coins;
+    private int _lives = 3;
 
     void Start()
     {
@@ -40,7 +46,8 @@ public class Player : MonoBehaviour
             {
                 canDoubleJump = false;
                 yVelocity = _jumpHeight;
-            } else
+            }
+            else
             {
                 yVelocity -= _gravity;
             }
@@ -53,6 +60,7 @@ public class Player : MonoBehaviour
 
         velocity.y = yVelocity;
         _controller.Move(velocity * Time.deltaTime);
+        
     }
        
     public void AddCoin()
@@ -60,5 +68,20 @@ public class Player : MonoBehaviour
         _coins++;
         gui.GetComponent<UIManager>().UpdateCoinsDisplay(_coins);
         _coinSelected.Play();
+    }
+
+    public void Damage()
+    {
+        _lives--;
+        gui.GetComponent<UIManager>().UpdateLivesDisplay(_lives);
+
+        if (_lives <= 0)
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        _controller.enabled = false;
+        transform.position = _startPosition.position;
+        _controller.enabled = true;
     }
 }
