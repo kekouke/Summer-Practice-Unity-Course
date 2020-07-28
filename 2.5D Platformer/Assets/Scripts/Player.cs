@@ -13,13 +13,18 @@ public class Player : MonoBehaviour
     private float _gravity;
     [SerializeField]
     private float _jumpHeight;
+    [SerializeField]
+    private GameObject gui;
 
+    private AudioSource _coinSelected;
     private float yVelocity;
     private bool canDoubleJump;
+    private int _coins;
 
     void Start()
     {
         _controller = GetComponent<CharacterController>();
+        _coinSelected = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,4 +55,10 @@ public class Player : MonoBehaviour
         _controller.Move(velocity * Time.deltaTime);
     }
        
+    public void AddCoin()
+    {
+        _coins++;
+        gui.GetComponent<UIManager>().UpdateCoinsDisplay(_coins);
+        _coinSelected.Play();
+    }
 }
