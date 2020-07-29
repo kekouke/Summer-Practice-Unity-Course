@@ -1188,7 +1188,6 @@ GameObject:
   - component: {fileID: 1735620700}
   - component: {fileID: 1735620699}
   - component: {fileID: 1735620698}
-  - component: {fileID: 1735620697}
   - component: {fileID: 1735620701}
   - component: {fileID: 1735620702}
   - component: {fileID: 1735620703}
@@ -1199,20 +1198,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1735620697
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735620696}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1735620698
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1306,8 +1291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _gravity: 3
-  _jumpHeight: 45
+  _gravity: 1
+  _jumpHeight: 15
   gui: {fileID: 966425346}
   _startPosition: {fileID: 1527206394}
 --- !u!82 &1735620703

@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
             {
                 canDoubleJump = false;
                 yVelocity = _jumpHeight;
+                //velocity.y = _jumpHeight;
             }
             else
             {
