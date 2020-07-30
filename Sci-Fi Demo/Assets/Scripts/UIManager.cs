@@ -21,4 +21,8 @@ public class UIManager : MonoBehaviour
     {
         coin.SetActive(true);
     }
+    public void TakeMoney()
+    {
+        coin.SetActive(false);
+    }
 }

@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Runtime.Remoting.Messaging;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _gravity;
     [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject weapon;
 
     private CharacterController _controller;
     private int _coins;
+    public int Money { get => _coins; }
     
     void Start()
     {
@@ -33,4 +36,15 @@ public class Player : MonoBehaviour
         _coins += coins;
         canvas.GetComponent<UIManager>().AddCoin();    
     }
+
+    public void RemoveCoin()
+    {
+        _coins--;
+        canvas.GetComponent<UIManager>().TakeMoney();
+    } 
+
+    public void EnableWeapon()
+    {
+        weapon.SetActive(true);
+    } 
 }
