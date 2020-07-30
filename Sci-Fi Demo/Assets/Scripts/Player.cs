@@ -5,7 +5,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _gravity;
 
-    CharacterController _controller;
+    private CharacterController _controller;
+    private int _coins;
+    
     void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -23,5 +25,10 @@ public class Player : MonoBehaviour
         velocity = transform.TransformDirection(velocity);
         velocity.y -= _gravity;
         _controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void AddCoin(int coins)
+    {
+        _coins += coins;
     }
 }
