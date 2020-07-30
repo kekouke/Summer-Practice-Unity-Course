@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _gravity;
+    [SerializeField] private GameObject canvas;
 
     private CharacterController _controller;
     private int _coins;
@@ -30,5 +31,6 @@ public class Player : MonoBehaviour
     public void AddCoin(int coins)
     {
         _coins += coins;
+        canvas.GetComponent<UIManager>().AddCoin();    
     }
 }
