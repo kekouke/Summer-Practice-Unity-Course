@@ -58,8 +58,19 @@ public class RayShooter : MonoBehaviour
         if (Physics.Raycast(ray, out raycastInfo))
         {
             StartCoroutine(HitMarkerRoutine(raycastInfo));
-        }
 
+            if (raycastInfo.transform.tag == "Crate")
+            {
+                Destructable crate = raycastInfo.transform.GetComponent<Destructable>();
+
+                if (crate != null)
+                {
+                    crate.DestroyCrate();
+                }
+
+            }
+
+        }
     }
 
     IEnumerator ReloadRoutine()

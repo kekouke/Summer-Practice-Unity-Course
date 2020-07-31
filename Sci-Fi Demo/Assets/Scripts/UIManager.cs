@@ -25,4 +25,4 @@ public class UIManager : MonoBehaviour
     {
         coin.SetActive(false);
     }
-}
+}   

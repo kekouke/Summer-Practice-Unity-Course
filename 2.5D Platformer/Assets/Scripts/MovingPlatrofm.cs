@@ -11,6 +11,11 @@ public class MovingPlatrofm : MonoBehaviour
 
     void Update()
     {
+        MovePlatform();
+    }
+
+    private void MovePlatform()
+    {
         transform.position = Vector3.MoveTowards(transform.position, _pointB.position, 5 * Time.deltaTime);
 
         if (transform.position == _pointB.position || transform.position == _pointA.position)

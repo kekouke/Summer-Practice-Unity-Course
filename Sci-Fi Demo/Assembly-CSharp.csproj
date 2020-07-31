@@ -119,11 +119,12 @@
     <Compile Include="Assets\Level_Dont_Touch\Standard Assets\Utility\WaypointProgressTracker.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Coin.cs" />
+    <Compile Include="Assets\Scripts\Destructable.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\RayShooter.cs" />
+    <Compile Include="Assets\Scripts\SharkShop.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
-    <Compile Include="Assets\SharkShop.cs" />
     <None Include="Assets\Level_Dont_Touch\Environment_Model\Cinema Suite\Cinema Themes\ReadMe.txt" />
     <None Include="Assets\Level_Dont_Touch\Environment_Model\Fonts\OFL.txt" />
     <None Include="Assets\Level_Dont_Touch\Environment_Model\Shaders\ToonShader.shader" />
